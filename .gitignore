@@ -128,3 +128,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 /flask_intro/hw_2.csv
+/flask_intro/test.py
