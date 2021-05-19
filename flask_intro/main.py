@@ -79,7 +79,10 @@ def mean():
     inches = sum([float(i['"Height(Inches)"']) for i in data])
     pounds = sum([float(i['"Weight(Pounds)"']) for i in data])
 
-    return f"Mean height - {round((inches*cm)/col_num, 2)}(cm), mean weight {round((pounds*kg)/col_num, 2)}(kg)."
+    mean_height = (inches * cm)/col_num
+    mean_weight = (pounds * kg)/col_num
+
+    return f"Mean height - {round(mean_height, 2)}(cm), mean weight {round(mean_weight, 2)}(kg)."
 
 
 @app.route('/space/')
