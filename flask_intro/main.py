@@ -46,7 +46,7 @@ def gen_pass():  # length = 20
 
 @app.route('/requirements/')
 def requirements():
-    return read_txt('requirements')
+    return read_txt('requirements.txt')
 
 
 @app.route('/generate-users/')
