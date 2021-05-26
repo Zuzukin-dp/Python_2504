@@ -91,6 +91,154 @@ def space():
     return str(astro.json()['number'])
 
 
+# CRUD users
+@app.route('/users/create/')
+def users_create():
+    import sqlite3
+    query_params = request.args
+
+    first_name = query_params.get('first_name')
+    age = int(query_params.get('age'))
+
+    con = sqlite3.connect("./users.db")
+    cur = con.cursor()
+
+    sql = f"""
+    INSERT INTO users
+    values (null,'{first_name}', {age});
+    """
+    cur.execute(sql)
+    con.commit()
+    con.close()
+    return 'User was Created'
+
+
+@app.route('/users/delete/')
+def users_delete():
+    import sqlite3
+
+    con = sqlite3.connect("./users.db")
+    cur = con.cursor()
+
+    sql = f"""
+    DELETE FROM users;
+    """
+    cur.execute(sql)
+    con.commit()
+    con.close()
+    return 'All users were deleted'
+
+
+@app.route('/users/list/')
+def users_list():
+    import sqlite3
+
+    con = sqlite3.connect("./users.db")
+    cur = con.cursor()
+
+    sql = f"""
+    SELECT * FROM users;
+    """
+    cur.execute(sql)
+    users_lst = cur.fetchall()
+    # breakpoint()
+    con.close()
+    return str(users_lst)
+
+
+@app.route('/users/update/')
+def users_update():
+    import sqlite3
+    query_params = request.args
+
+    age = int(query_params.get('age'))
+
+    con = sqlite3.connect("./users.db")
+    cur = con.cursor()
+
+    sql = f"""
+    UPDATE users SET age={age};
+    """
+    cur.execute(sql)
+    con.commit()
+    con.close()
+    return 'Users updated'
+
+
+# CRUD phones
+@app.route('/phones/create/')
+def phones_create():
+    import sqlite3
+    query_params = request.args
+
+    phone_number = query_params.get('phone_number')
+    user_id = int(query_params.get('user_id'))
+
+    con = sqlite3.connect("./users.db")
+    cur = con.cursor()
+
+    sql = f"""
+    INSERT INTO phones
+    values (null,'{phone_number}', {user_id});
+    """
+    cur.execute(sql)
+    con.commit()
+    con.close()
+    return 'Phones was Created'
+
+
+@app.route('/phones/delete/')
+def phones_delete():
+    import sqlite3
+
+    con = sqlite3.connect("./users.db")
+    cur = con.cursor()
+
+    sql = f"""
+    DELETE FROM phones;
+    """
+    cur.execute(sql)
+    con.commit()
+    con.close()
+    return 'All phones were deleted'
+
+
+@app.route('/phones/list/')
+def phones_list():
+    import sqlite3
+
+    con = sqlite3.connect("./users.db")
+    cur = con.cursor()
+
+    sql = f"""
+    SELECT * FROM phones;
+    """
+    cur.execute(sql)
+    phones_lst = cur.fetchall()
+    # breakpoint()
+    con.close()
+    return str(phones_lst)
+
+
+@app.route('/phones/update/')
+def phones_update():
+    import sqlite3
+    query_params = request.args
+
+    user_id = int(query_params.get('user_id'))
+
+    con = sqlite3.connect("./users.db")
+    cur = con.cursor()
+
+    sql = f"""
+    UPDATE phones SET age={user_id};
+    """
+    cur.execute(sql)
+    con.commit()
+    con.close()
+    return 'Phones updated'
+
+
 if __name__ == '__main__':
     app.run(port='5000', debug=True)
 
