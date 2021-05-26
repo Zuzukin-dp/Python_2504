@@ -132,3 +132,5 @@ dmypy.json
 CW/
 HW/
 /flask_intro/users.db
+/flask_intro/.idea/
+.idea/
